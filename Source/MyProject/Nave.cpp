@@ -75,3 +75,42 @@ void ANave::MoverIzquierda(float Valor)
 	AddMovementInput(GetActorRightVector(), Valor);
 }
 
+
+//codigo movimiento
+.h
+// FVector posicionInicialY;
+// FVector posicionActualY;
+// FVector posicionFinalY;
+// bool y;
+// float incremento;
+// void movimientoY();
+// FORCEINLINE bool GetMoverseY() { return y; }
+// FORCEINLINE void SetMoverseY(bool m = false) { y = m; }
+
+.cpp
+BeginPlay
+// posicionInicialY = GetActorLocation() + FVector(0.0f, 220.0f, 0.0f);
+// posicionActualY = posicionInicialY;
+// posicionFinalY = posicionActualY + FVector(0.0f, -480.0f, 0.0f);
+// incremento = 2.0f;
+// moverse = true;
+
+// void APlataforma::movimientoY()
+// {
+// 	if (GetMoverseY()) {
+// 		if (moverse)
+// 		{
+// 			if (posicionActualY.Y > posicionFinalY.Y) posicionActualY.Y -= incremento;
+// 			else moverse = false;
+// 		}
+// 		else
+// 		{
+// 			if (posicionActualY.Y < posicionInicialY.Y) posicionActualY.Y += incremento;
+// 			else moverse = true;
+// 		}
+
+// 		SetActorLocation(posicionActualY);
+// 	}
+
+// }
+
