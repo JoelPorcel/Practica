@@ -1,0 +1,8 @@
+Content/*
+Binaries/*
+Intermediate/*
+
+Config/*
+Saved/*
+DerivedDataCache/*
+.vs/
