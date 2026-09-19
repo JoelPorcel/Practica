@@ -49,5 +49,9 @@ public:
 	void MoverAtras(float valor);
 	void MoverIzquierda(float Valor);
 
-	
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OthyerBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void Disparar();
+
+	void DispararPelota();
 };
