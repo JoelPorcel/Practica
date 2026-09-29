@@ -11,6 +11,7 @@
 #include "Projectile.h"
 #include "Components/BoxComponent.h"
 #include "ProjectileRebote.h"
+#include "Moneda.h"
 
 // Sets default values
 ANave::ANave()
@@ -18,7 +19,7 @@ ANave::ANave()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshPrueba"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("StaticMesh'/Game/MyStuff/ObjetoPrueba.ObjetoPrueba'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("StaticMesh'/Game/TwinStick/Meshes/TwinStickUFO.TwinStickUFO'"));
 	if (MeshAsset.Succeeded()) Mesh->SetStaticMesh(MeshAsset.Object);
 	SetRootComponent(Mesh);
 	Box = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
@@ -92,9 +93,10 @@ void ANave::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Begin entrando")));
 	if (OtherActor) {
-		ACubo* cubo = Cast<ACubo>(OtherActor);
-		if (cubo) {
-			cubo->mensaje();
+		AMoneda* moneda = Cast<AMoneda>(OtherActor);
+		if (moneda) {
+			monedas++;
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Monedas: %d"), monedas));
 		}
 	}
 }

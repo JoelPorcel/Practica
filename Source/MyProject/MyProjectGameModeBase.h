@@ -32,4 +32,8 @@ public:
 	void DetenerMovimientos();
 	void ReiniciarMovimiento();
 	void destruir();
+
+	FVector lim1 = FVector(1952.000000,-87.000000, 74.000000);
+	FVector lim2 = FVector(261.000000,192.000000, 74.000000);
+	FVector lim3 = FVector(-3550.000000, -2175.000000, 71.000000);
 };

@@ -54,4 +54,5 @@ public:
 	void Disparar();
 
 	void DispararPelota();
+	int monedas = 0;
 };

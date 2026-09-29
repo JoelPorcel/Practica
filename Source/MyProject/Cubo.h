@@ -39,6 +39,7 @@ public:
 	FORCEINLINE bool GetMoverseY() { return y; }
 	FORCEINLINE void SetMoverseY(bool m = false) { y = m; }
 
+	void movimientoY();
 	void mensaje();
 
 	int sumar(int a, int b, int c);

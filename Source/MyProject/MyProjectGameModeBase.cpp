@@ -9,6 +9,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "PlataformaDestructible.h"
 #include "Cubo.h"
+#include "Moneda.h"
+#include "Enemigo.h"
 
 AMyProjectGameModeBase::AMyProjectGameModeBase()
 {
@@ -19,8 +21,11 @@ AMyProjectGameModeBase::AMyProjectGameModeBase()
 void AMyProjectGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
+	UWorld* world = GetWorld();
+	if(world) world->SpawnActor<AEnemigo>(FVector(99, 277, 246), FRotator::ZeroRotator);
+
 	//AparecerPlataformas();
-	GetWorld()->SpawnActor<APlataformaAerea>(FVector(99,277, 246), FRotator::ZeroRotator);
+	/*GetWorld()->SpawnActor<APlataformaAerea>(FVector(99,277, 246), FRotator::ZeroRotator);
 	GetWorld()->SpawnActor<APlataformaDestructible>(FVector(99, 632, 246), FRotator::ZeroRotator);
 	GetWorld()->SpawnActor<APlataformaIndestructible>(FVector(99, 984, 246), FRotator::ZeroRotator);
 	GetWorld()->SpawnActor<APlataformaTerrestre>(FVector(99, 1300, 246), FRotator::ZeroRotator);
@@ -28,6 +33,31 @@ void AMyProjectGameModeBase::BeginPlay()
 	ACubo *c = GetWorld()->SpawnActor<ACubo>(FVector(99, 277, 600), FRotator::ZeroRotator);
 	c->sumar(1, 2, 3);
 	c->sumar(1.5f, 2.5f);
+
+	float LimitesAreasX[3] = { 1952.0f, 261.0f, -3550.0f };
+	int cantidad = FMath::RandRange(10, 30);
+	
+	for (int16 j = 0; j < cantidad; j++) {
+		FVector LocacionRandom;
+		FRotator Rotacion;
+		int ubicacion = FMath::RandRange(0, 1);
+		if (ubicacion == 0) {
+			float RandX = FMath::RandRange(LimitesAreasX[0], LimitesAreasX[1]);
+			float RandY = FMath::RandRange(-87.0f, -2175.0f);
+			float RandZ = 49.f;
+			LocacionRandom = FVector(RandX, RandY, RandZ);
+			Rotacion = FRotator(0, 0, 0);
+		}
+		else {
+			float RandX = FMath::RandRange(LimitesAreasX[1], LimitesAreasX[2]);
+			float RandY = FMath::RandRange(-87.0f, -2175.0f);
+			float RandZ = 145.f;
+			LocacionRandom = FVector(RandX, RandY, 100.0f);
+			Rotacion = FRotator(0, 0, 0);
+		}
+
+		GetWorld()->SpawnActor<AMoneda>(LocacionRandom, Rotacion);
+	}*/
 }
 
 void AMyProjectGameModeBase::Tick(float DeltaTime)

@@ -26,7 +26,7 @@ void ACubo::BeginPlay()
 	Super::BeginPlay();
 	posicionInicialY = GetActorLocation() + FVector(0.0f, 220.0f, 0.0f);
 	posicionActualY = posicionInicialY;
-	posicionFinalY = posicionActualY + FVector(0.0f, -480.0f, 0.0f);
+	posicionFinalY = GetActorLocation() + FVector(0.0f, -480.0f, 0.0f);
 	incremento = 2.0f;
 	moverse = true;
 }
@@ -53,21 +53,21 @@ float ACubo::sumar(float a, float b)
 	return a+b;
 }
 
-//void APlataforma::movimientoY()
-//{
-//	if (GetMoverseY()) {
-//		if (moverse)
-//		{
-//			if (posicionActualY.Y > posicionFinalY.Y) posicionActualY.Y -= incremento;
-//			else moverse = false;
-//		}
-//		else
-//		{
-//			if (posicionActualY.Y < posicionInicialY.Y) posicionActualY.Y += incremento;
-//			else moverse = true;
-//		}
-//
-//		SetActorLocation(posicionActualY);
-//	}
-//
-//}
+void ACubo::movimientoY()
+{
+	if (GetMoverseY()) {
+		if (moverse)
+		{
+			if (posicionActualY.Y > posicionFinalY.Y) posicionActualY.Y -= incremento;
+			else moverse = false;
+		}
+		else
+		{
+			if (posicionActualY.Y < posicionInicialY.Y) posicionActualY.Y += incremento;
+			else moverse = true;
+		}
+
+		SetActorLocation(posicionActualY);
+	}
+
+}

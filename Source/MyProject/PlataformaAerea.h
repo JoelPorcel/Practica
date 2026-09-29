@@ -30,7 +30,4 @@ public:
 						int32 OthyerBodyIndex, 
 						bool bFromSweep, 
 						const FHitResult& SweepResult);
-
-
-
 };
