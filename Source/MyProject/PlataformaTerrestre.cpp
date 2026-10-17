@@ -30,6 +30,6 @@ void APlataformaTerrestre::Tick(float DeltaTime)
 }
 void APlataformaTerrestre::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(TEXT("Un objeto de tipo %s colisiono con End en Trigger"), *OtherActor->GetName()));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(TEXT("Un objeto de tipo %s colisiono con End en Trigger"), *OtherActor->GetName()));
 }
 

@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "intelliSenseMode": "msvc-x64",
+            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "windowsSdkVersion": "10.0.26100.0",
+            "includePath": [
+                "${workspaceFolder}/Source/**",
+                "${workspaceFolder}/Intermediate/Build/Win64/UE4Editor/Inc/**",
+                "C:/Program Files/Epic Games/UE_4.27/Engine/Source/**",
+                "C:/Program Files/Epic Games/UE_4.27/Engine/Intermediate/Build/Win64/UE4Editor/Inc/**"
+            ],
+            "defines": [
+                "UNICODE",
+                "_UNICODE",
+                "__UNREAL__",
+                "UBT_COMPILED_PLATFORM=Win64",
+                "WITH_ENGINE=1",
+                "WITH_COREUOBJECT=1",
+                "MYPROJECT_API="
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/Source",
+                    "C:/Program Files/Epic Games/UE_4.27/Engine/Source"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            }
+        }
+    ],
+    "version": 4
+}

@@ -44,7 +44,7 @@ void AEnemigo::Tick(float DeltaTime)
 void AEnemigo::moverY()
 {
 	if (GetMoverseY()) {
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, FString::Printf(TEXT("moviendose %i"), n));
+		//GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, FString::Printf(TEXT("moviendose %i"), n));
 		n++;
 		if (moverse)
 		{

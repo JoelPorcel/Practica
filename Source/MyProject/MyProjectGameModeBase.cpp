@@ -11,18 +11,63 @@
 #include "Cubo.h"
 #include "Moneda.h"
 #include "Enemigo.h"
+#include "AbstractFactory/AbstractFactory.h"
+#include "AbstractFactory/FabricaHierro.h"
+#include "AbstractFactory/FabricaAerea.h"
+#include "AbstractFactory/FabricaTrampa.h"
+#include "Builder/Director.h"
+#include "Builder/ContructorBasico.h"
+#include "Builder/ConstructorAvanzado.h"
+#include "Builder/ObjetoComplejo.h"
+#include "Facade/NivelFacade.h"
 
 AMyProjectGameModeBase::AMyProjectGameModeBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	DefaultPawnClass = ANave::StaticClass();
+	Factory = nullptr;
+	Director = nullptr;
+	EstructuraBasica = nullptr;
+	EstructuraAvanzada = nullptr;
+	NivelFacade = nullptr;
 }
 
 void AMyProjectGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
-	UWorld* world = GetWorld();
-	if(world) world->SpawnActor<AEnemigo>(FVector(99, 277, 246), FRotator::ZeroRotator);
+	GetWorld()->SpawnActor<AEnemigo>(FVector(99, 277, 246), FRotator::ZeroRotator);
+
+	// UFabricaHierro* FabHierro = NewObject<UFabricaHierro>(this);
+	// UFabricaAerea* FabAerea = NewObject<UFabricaAerea>(this);
+	// UFabricaTrampa* FabTrampa = NewObject<UFabricaTrampa>(this);
+	// Factory = FabHierro;
+	// Factory->createA(FVector(100.0f, 200.0f, 146.0f));
+	// Factory->createB(FVector(100.0f, 500.0f, 146.0f));
+
+	// SetFactory(FabAerea);
+	// Factory->createA(FVector(100.0f, 800.0f, 146.0f));
+	// Factory->createB(FVector(100.0f, 1100.0f, 146.0f));
+
+	// SetFactory(FabTrampa);
+	// Factory->createA(FVector(100.0f, 1400.0f, 146.0f));
+	// Factory->createB(FVector(100.0f, 1700.0f, 146.0f));
+
+	Director = NewObject<UDirector>(this);
+
+	UContructorBasico* ConstructorBasico = NewObject<UContructorBasico>(this);
+	Director->SetBuilder(ConstructorBasico);
+	Director->ConstruirBasico(FVector(500.0f, 200.0f, 150.0f));
+	EstructuraBasica = Director->ObtenerResultado();
+
+	UConstructorAvanzado* ConstructorAvanzado = NewObject<UConstructorAvanzado>(this);
+	Director->SetBuilder(ConstructorAvanzado);
+	Director->ConstruirAvanzado(FVector(500.0f, 800.0f, 150.0f));
+	EstructuraAvanzada = Director->ObtenerResultado();
+
+	// NivelFacade = NewObject<UNivelFacade>(this);
+	// NivelFacade->Inicializar();
+	// NivelFacade->ConfigurarZonaBatalla(FVector(1500.0f, 500.0f, 150.0f));
+
 
 	//AparecerPlataformas();
 	/*GetWorld()->SpawnActor<APlataformaAerea>(FVector(99,277, 246), FRotator::ZeroRotator);
@@ -63,6 +108,23 @@ void AMyProjectGameModeBase::BeginPlay()
 void AMyProjectGameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	MoverObjetoComplejo(DeltaTime);
+	if (NivelFacade)
+	{
+		NivelFacade->ActualizarNivel(DeltaTime);
+	}
+}
+
+void AMyProjectGameModeBase::MoverObjetoComplejo(float DeltaTime)
+{
+	if (EstructuraBasica)
+	{
+		EstructuraBasica->Mover(FVector(0.0f, FMath::Sin(GetWorld()->GetTimeSeconds() * 2.0f) * 150.0f * DeltaTime, 0.0f));
+	}
+	if (EstructuraAvanzada)
+	{
+		EstructuraAvanzada->Rotar(FRotator(0.0f, 40.0f * DeltaTime, 0.0f));
+	}
 }
 
 void AMyProjectGameModeBase::AparecerPlataformas()
@@ -178,4 +240,9 @@ void AMyProjectGameModeBase::destruir()
 
 		plataformas.RemoveAt(random);
 	}
+}
+
+void AMyProjectGameModeBase::SetFactory(IAbstractFactory* InFactory)
+{
+	Factory = InFactory;
 }
